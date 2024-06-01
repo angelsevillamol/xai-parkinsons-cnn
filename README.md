@@ -1,1 +1,1 @@
-# XAI-Parkinsons-CNN
+# XAI Parkinsons's CNN
