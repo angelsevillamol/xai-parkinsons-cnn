@@ -5,7 +5,7 @@ Allows the management and processing of ROIs to perform heatmap
 relevance analysis.
 
 Author: Angel Sevilla Molina
-source: 
+source: https://github.com/angelsevillamol/xai-parkinsons-cnn/blob/main/rois.py
 """
 
 import re
@@ -112,11 +112,14 @@ class ROIManager:
         """
         for roi_name in labels:
             idx = labels.index(roi_name)
+            # Convert the region name
             roi_key = re.sub(r'\([^)]*\)', '', roi_name).strip().lower()
             base_key = self.__get_base_key(roi_key)
+            # Create a binary mask
             roi_mask = math_img(f'img == {idx}', img=maps)
             mask_t = torch.tensor(roi_mask.get_fdata(), dtype=torch.bool)
 
+            # Check mask dimensions
             if self.__mask_shape is None:
                 self.__mask_shape = mask_t.shape
             elif self.__mask_shape != mask_t.shape:
@@ -185,7 +188,7 @@ class ROIAnalyzer:
 
         for roi in rois:
             if roi.mask.shape != heatmap_t.shape:
-                raise ValueError("incompatible dimensions")
+                raise ValueError('incompatible dimensions')
 
             mean, std = self.calculate_roi_stats(heatmap_t, roi)
             stats[f'{roi.name} mean'] = mean
@@ -214,7 +217,7 @@ class ROIAnalyzer:
           ValueError: if the mask has incompatible dimensions.
         """
         if roi.mask.shape != heatmap_t.shape:
-            raise ValueError("incompatible dimensions")
+            raise ValueError('incompatible dimensions')
 
         roi.mask = roi.mask.to(self.__device)
         region_t = heatmap_t[roi.mask > 0]

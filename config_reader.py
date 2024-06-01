@@ -4,8 +4,9 @@
 Reads the application's configuration file.
 
 Author: Angel Sevilla Molina
-source: 
+source: https://github.com/angelsevillamol/xai-parkinsons-cnn/blob/main/config_reader.py
 """
+
 import os
 import configparser
 

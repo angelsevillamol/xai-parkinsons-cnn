@@ -4,7 +4,7 @@
 Script for visualizing MRI images using different explanatory methods.
 
 Author: Angel Sevilla Molina
-source: 
+source: https://github.com/angelsevillamol/xai-parkinsons-cnn/blob/main/visualize_heatmaps.py
 """
 
 import argparse

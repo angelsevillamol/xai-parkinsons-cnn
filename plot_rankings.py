@@ -5,7 +5,7 @@ Produces visual representations of ROI analysis from convolutional
 neural networks for Parkinson's disease.
 
 Author: Angel Sevilla Molina
-source: 
+source: https://github.com/angelsevillamol/xai-parkinsons-cnn/blob/main/plot_rankings.py
 """
 
 import argparse

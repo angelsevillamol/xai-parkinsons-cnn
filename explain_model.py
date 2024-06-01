@@ -5,10 +5,11 @@ Script for generating heatmaps using XAI techniques for a set of
 previously trained convolutional neural networks.
 
 Author: Angel Sevilla Molina
-source: 
+source: https://github.com/angelsevillamol/xai-parkinsons-cnn/blob/main/explain_model.py
 """
 
 import os
+import sys
 import random
 from inspect import signature
 from typing import Tuple, List
@@ -305,7 +306,11 @@ def generate_heatmaps(job : signac.contrib.job.Job) -> None:
 
         # For each explanatory method
         for method in METHODS:
-            xai_method = XAIMethod(net, method, layer)
+            try:
+                xai_method = XAIMethod(net, method, layer)
+            except NotImplementedError as error:
+                sys.exit(f'Error: {error}')
+
             split_dir = f'{method}/{model}/fold{job.sp.fold}/{split}'
             method_path = os.path.join(heatmaps_path, split_dir)
             os.makedirs(method_path, exist_ok=True)
@@ -313,10 +318,15 @@ def generate_heatmaps(job : signac.contrib.job.Job) -> None:
             # For each data of the evaluation set
             print(f'Generating heatmaps in {method_path}')
             for idx, (sample, target) in enumerate(test_dl):
-                input_t = sample
-                input_t.requires_grad = True
-                heatmap = xai_method.apply(input_t, target.item(),
-                                           postprocess=True)
+                # Generate the explanatory heatmap
+                try:
+                    input_t = sample
+                    input_t.requires_grad = True
+                    heatmap = xai_method.apply(input_t, target.item(),
+                                              postprocess=True)
+                except ValueError as error:
+                    sys.exit(f'Error: {error}')
+
                 filename = filenames[idx].split('.')[0] + '.pt'
                 torch.save(heatmap, os.path.join(method_path, filename))
 

@@ -5,12 +5,13 @@ Handles explanatory techniques for 3D CNN models for classification
 tasks.
 
 Author: Angel Sevilla Molina
-source: 
+source: https://github.com/angelsevillamol/xai-parkinsons-cnn/blob/main/xai_method.py
 """
 
 import torch
 from captum.attr import LayerAttribution, LayerGradCam, GuidedBackprop
-from LRP import LRP
+
+from lrp import LRP
 
 
 class XAIMethod:
