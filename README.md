@@ -1,5 +1,5 @@
 # Application of explanatory methods on CNN models for the diagnosis of Parkinson's disease
-Code for the Final Degree Project  experimentation "Application of explanatory methods on CNN models for the diagnosis of Parkinson's disease".
+Code for the Final Degree Project "Application of explanatory methods on CNN models for the diagnosis of Parkinson's disease".
 
 
 ## Introduction
@@ -13,7 +13,7 @@ This project is an extension of the article [An ordinal CNN approach for the ass
 ## Installation
 The application has been developed and tested on **GNU/Linux** systems using **Python 3.9**. The `requirements.txt` file is included to facilitate the installation of all dependencies via the `pip` package manager by running the following command:
 ```bash
-pip install  -r  requirements.txt
+pip install -r requirements.txt
 ```
 No additional installation steps are required. The provided code folder should be copied into the same directory as the original project.
 
@@ -61,7 +61,7 @@ python explain_model.py  run
 
 To analyze the influence assigned to the features learned by the models for decision-making, calculating the relevance of the ROIs identified in the heatmaps, use the following script:
 ```bash
-python calculate_stats.py  --method [method] --model [model] --fold [fold]
+python calculate_stats.py --method [method] --model [model] --fold [fold]
 ```
 where:
 -  `method` indicates the explanatory method whose results will be analyzed.
@@ -80,7 +80,7 @@ where:
 If you want to obtain two-dimensional comparative images of the heatmaps obtained after applying different explanatory techniques, you can run the following script:
 
 ```bash
-python visualize_heatmaps.py  --model [model] --fold [fold] --split [split]
+python visualize_heatmaps.py --model [model] --fold [fold] --split [split]
 ```
 where:
 -   `model` indicates the CNN model whose results will be represented.
